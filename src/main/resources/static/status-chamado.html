@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SysHelp - Status do Chamado</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        async function fetchStatusAndUpdate(chamadoId) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/chamado/${chamadoId}`);
+                if (!response.ok) {
+                    throw new Error("Erro ao obter o status do chamado.");
+                }
+
+                const chamado = await response.json();
+                const status = chamado.status;
+
+                // Atualiza o texto do status
+                const statusText = document.getElementById("status-chamado");
+                statusText.innerText = `Status do Chamado: ${status}`;
+
+                // Atualiza a barra de progresso
+                const statusIndicator = document.getElementById("status-indicator");
+                if (status === "AGUARDANDO") {
+                    statusIndicator.style.width = "33%";
+                    statusIndicator.style.backgroundColor = "#87CEEB"; // Azul
+                } else if (status === "ANDAMENTO") {
+                    statusIndicator.style.width = "66%";
+                    statusIndicator.style.backgroundColor = "#FFD700"; // Amarelo
+                } else if (status === "FINALIZADO") {
+                    statusIndicator.style.width = "100%";
+                    statusIndicator.style.backgroundColor = "#32CD32"; // Verde
+                }
+            } catch (error) {
+                console.error("Erro ao atualizar o status:", error);
+                document.getElementById("status-chamado").innerText =
+                    "Erro ao carregar o status do chamado. Tente novamente.";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const params = new URLSearchParams(window.location.search);
+            const chamadoId = params.get("id");
+
+            if (!chamadoId) {
+                document.getElementById("status-chamado").innerText =
+                    "ID do chamado não encontrado.";
+                return;
+            }
+
+            // Atualiza a barra e o texto do status
+            fetchStatusAndUpdate(chamadoId);
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>SysHelp - Sistema de Suporte</h1>
+    </header>
+    <main>
+        <h2>Status do Chamado</h2>
+        <p id="status-chamado">Aguarde, estamos processando seu chamado...</p>
+        <div id="status-bar-container">
+            <div id="status-bar">
+                <div id="status-indicator"></div>
+            </div>
+            <div id="status-labels">
+                <span>AGUARDANDO</span>
+                <span>ANDAMENTO</span>
+                <span>FINALIZADO</span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button onclick="window.location.href='index.html'">Voltar à Página Inicial</button>
+        </div>
+    </main>
+    <footer>&copy; Adriano Victor N. Ribeiro - 2025</footer>
+</body>
+</html>

@@ -1,0 +1,64 @@
+/* Página de Lista de Chamados */
+main {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+main h2 {
+    text-align: center;
+    color: #003366;
+}
+
+/* Estilos para cada chamado */
+.chamado {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chamado h3 {
+    font-size: 18px;
+    color: #003366;
+}
+
+.chamado p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.chamado p strong {
+    font-weight: bold;
+}
+
+/* Estilo para separar os chamados */
+hr {
+    border: 1px solid #eee;
+    margin-top: 10px;
+}
+
+/* Barra superior */
+header {
+    background-color: #003366;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #666;
+}
