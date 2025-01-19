@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         try {
-            const response = await fetch("http://localhost:8080/api/chamado", {
+            const response = await fetch("http://147.93.36.85:8080/api/chamado", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
