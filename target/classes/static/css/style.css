@@ -97,7 +97,6 @@ footer {
     text-align: center;
     margin-top: 20px;
     padding: 10px 0;
-    background-color: #f4f4f4;
     color: #555;
 }
 
@@ -144,13 +143,66 @@ footer {
     color: #333;
 }
 
+.dropdown {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.dropdown-button {
+    width: 146%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown-button:after {
+    content: "▼";
+    float: right;
+    margin-left: 10px;
+}
+
+.dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 140%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    display: none;
+    z-index: 1000;
+    list-style: none;
+}
+
+.dropdown-list.open {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
 /* ---------------------- Responsividade ---------------------- */
 
 /* Para telas menores que 768px (dispositivos móveis) */
 @media (max-width: 768px) {
     main {
-        padding: 15px;
-        margin: 10px;
+        padding: 30px;
+        margin: 5px;
         max-width: 100%;
         box-shadow: none; /* Remove a sombra para melhor aparência */
     }
@@ -160,7 +212,7 @@ footer {
     }
 
     main h2 {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     label {
@@ -170,8 +222,10 @@ footer {
     input[type="text"], 
     input[list], 
     textarea {
-        width: 100%; /* Garante que os inputs usem toda a largura */
+        width: 95%; /* Garante que os inputs usem toda a largura */
+        padding: 20px;
         font-size: 14px;
+        
     }
 
     button {
@@ -183,6 +237,17 @@ footer {
     footer {
         font-size: 12px;
     }
+    .dropdown-button {
+        width: 95%;
+        padding: 10px;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        cursor: pointer;
+        text-align: left;
+    }
+    
 }
 
 /* Para telas menores que 480px (smartphones pequenos) */
@@ -192,23 +257,38 @@ footer {
     }
 
     main h2 {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     input[type="text"], 
     input[list], 
     textarea {
-        font-size: 12px;
-        padding: 8px;
+        font-size: 15px;
+        padding: 10px;
     }
 
     button {
-        padding: 10px;
-        font-size: 12px;
+        padding: 15px;
+        font-size: 15px;
     }
 
     footer {
         font-size: 10px;
+    }
+
+    .dropdown-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 87%;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        display: none;
+        z-index: 1000;
+        list-style: none;
     }
 
     

@@ -3,6 +3,7 @@ package io.github.adrianovictorn.syshelp.dtos;
 import java.time.LocalDateTime;
 
 import io.github.adrianovictorn.syshelp.entity.Call;
+import io.github.adrianovictorn.syshelp.entity.Enums.Ocorrencia;
 import io.github.adrianovictorn.syshelp.entity.Enums.Setores;
 import io.github.adrianovictorn.syshelp.entity.Enums.Status;
 
@@ -14,7 +15,8 @@ public record ListCallDTO(
     LocalDateTime horarioSolicitado,
     LocalDateTime horarioFinalizado,
     Status status,
-    String numero
+    String numero,
+    Ocorrencia ocorrencia
 ) {
 
     public static ListCallDTO fromEntity(Call chamado){
@@ -26,7 +28,8 @@ public record ListCallDTO(
         chamado.getHorarioSolicitado(),
         chamado.getHorarioFinalizado(),
         chamado.getStatus(),
-        chamado.getNumeroParaContato());
+        chamado.getNumeroParaContato(),
+        chamado.getOcorrencia());
     }
     
 }

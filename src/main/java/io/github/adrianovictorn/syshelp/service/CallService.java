@@ -26,9 +26,11 @@ public class CallService {
         Call novoChamado = new Call();
         novoChamado.setSolicitante(dto.solicitante());
         novoChamado.setSetor(dto.setor());
+        novoChamado.setOcorrencia(dto.ocorrencia());
         novoChamado.setDescricao(dto.descricao());
         novoChamado.setStatus(Status.AGUARDANDO);
         novoChamado.setNumeroParaContato(dto.numero());
+      
 
         repository.save(novoChamado);
 

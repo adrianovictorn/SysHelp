@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SysHelp - Gerenciamento de Chamados</title>
     <style>
+        /* Estilo base */
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f9fc;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         header {
@@ -67,12 +65,6 @@
             font-weight: bold;
         }
 
-        table td select, table td input {
-            width: 100%;
-            padding: 5px;
-            font-size: 14px;
-        }
-
         .actions button {
             padding: 8px 12px;
             border: none;
@@ -96,6 +88,103 @@
             background-color: #f4f4f4;
             color: #555;
         }
+
+        /* Estilos de impressão */
+        @media print {
+            body {
+                margin: 10mm;
+                background-color: white;
+                color: black;
+                font-size: 12px;
+                line-height: 1.4;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            header, footer {
+                display: none;
+            }
+
+            main {
+                width: 100%;
+                margin: 0;
+                padding: 10px;
+                box-shadow: none;
+                background-color: white;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 0;
+                font-size: 12px;
+            }
+
+            table th, table td {
+                padding: 8px;
+                border: 1px solid black;
+                text-align: left;
+            }
+
+            table th {
+                background-color: #003366;
+                color: white;
+            }
+
+            table td {
+                background-color: white;
+            }
+
+            .actions {
+                display: none;
+            }
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            table thead {
+                display: none;
+            }
+
+            table tr {
+                display: block;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 10px;
+                position: relative;
+                background-color: #fff;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            table td {
+                display: block;
+                text-align: right;
+                padding: 8px 5px;
+                border-bottom: 1px solid #eee;
+            }
+
+            table td:last-child {
+                border-bottom: none;
+            }
+
+            table td[data-label]:before {
+                content: attr(data-label);
+                font-weight: bold;
+                float: left;
+                color: #003366;
+            }
+
+            table td:first-child {
+                font-weight: bold;
+                color: #003366;
+                cursor: pointer;
+            }
+
+            table tr.details-hidden td:not(:first-child) {
+                display: none;
+            }
+        }
     </style>
     <script>
         async function carregarChamados() {
@@ -104,7 +193,7 @@
                 const chamados = await response.json();
 
                 const tabela = document.getElementById('tabela-chamados');
-                tabela.innerHTML = ''; 
+                tabela.innerHTML = '';
 
                 chamados.forEach(chamado => {
                     const horarioCriado = chamado.horarioSolicitado
@@ -117,49 +206,53 @@
                         })
                         : 'Não informado';
 
-                    const horarioFinalizado = chamado.horarioFinalizado
-                        ? new Date(chamado.horarioFinalizado).toISOString().slice(0, 16)
-                        : '';
-
                     const row = document.createElement('tr');
+                    row.classList.add('details-hidden');
+                    row.setAttribute('data-id', chamado.id);
 
                     row.innerHTML = `
-                        <td>${chamado.id}</td>
-                        <td>${chamado.solicitante}</td>
-                        <td>${chamado.setor}</td>
-                        <td>${chamado.descricao}</td>
-                        <td>${horarioCriado}</td>
-                        <td>
-                            <select id="status-${chamado.id}">
+                        <td data-label="ID" onclick="toggleDetalhes(${chamado.id})">${chamado.id}</td>
+                        <td data-label="Solicitante">${chamado.solicitante}</td>
+                        <td data-label="Setor">${chamado.setor}</td>
+                        <td data-label="Descrição">${chamado.descricao}</td>
+                        <td data-label="Data/Horário de Abertura">${horarioCriado}</td>
+                        <td data-label="Ocorrências">${chamado.ocorrencia}</td>
+                        <td data-label="Status">
+                            <select id="status-${chamado.id}" ${chamado.status === 'FINALIZADO' ? 'disabled' : ''}>
                                 <option value="AGUARDANDO" ${chamado.status === 'AGUARDANDO' ? 'selected' : ''}>AGUARDANDO</option>
                                 <option value="ANDAMENTO" ${chamado.status === 'ANDAMENTO' ? 'selected' : ''}>ANDAMENTO</option>
                                 <option value="FINALIZADO" ${chamado.status === 'FINALIZADO' ? 'selected' : ''}>FINALIZADO</option>
                             </select>
                         </td>
-                        <td>
-                            <input type="datetime-local" id="horario-${chamado.id}" value="${horarioFinalizado}">
-                        </td>
-                        <td>${chamado.numero}</td>
                         <td class="actions">
-                            <button class="update" onclick="atualizarChamado(${chamado.id})">Atualizar</button>
+                            <button class="update" onclick="event.stopPropagation(); atualizarChamado(${chamado.id})" ${chamado.status === 'FINALIZADO' ? 'style=\'display:none;\'' : ''}>Atualizar</button>
                         </td>
                     `;
-
                     tabela.appendChild(row);
                 });
             } catch (error) {
                 console.error(error);
                 document.getElementById('tabela-chamados').innerHTML = `
                     <tr>
-                        <td colspan="9">Erro ao carregar os chamados. Verifique a conexão com a API.</td>
+                        <td colspan="8">Erro ao carregar os chamados.</td>
                     </tr>
                 `;
             }
         }
 
+        function toggleDetalhes(id) {
+            const row = document.querySelector(`tr[data-id='${id}']`);
+            row.classList.toggle('details-hidden');
+        }
+
         async function atualizarChamado(id) {
             const status = document.getElementById(`status-${id}`).value;
-            const horarioFinalizado = document.getElementById(`horario-${id}`).value;
+
+            let horarioFinalizado = '';
+            if (status === 'FINALIZADO') {
+                const now = new Date();
+                horarioFinalizado = now.toISOString();
+            }
 
             try {
                 const response = await fetch(`/api/chamado/${id}`, {
@@ -199,20 +292,18 @@
                     <th>Setor</th>
                     <th>Descrição</th>
                     <th>Data/Horário de Abertura</th>
+                    <th>Ocorrências</th>
                     <th>Status</th>
-                    <th>Horário Finalizado</th>
-                    <th>Número</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody id="tabela-chamados">
-                <!-- Os chamados serão carregados aqui -->
+                <!-- Dados serão preenchidos dinamicamente -->
             </tbody>
         </table>
     </main>
     <footer>
-        &copy; 2025 - Adriano Victor N. Ribeiro. Todos os direitos reservados.
+        <p>&copy; Adriano Victor N. Ribeiro - 2025 SysHelp</p>
     </footer>
 </body>
 </html>
-
