@@ -104,7 +104,7 @@
                 const chamados = await response.json();
 
                 const tabela = document.getElementById('tabela-chamados');
-                tabela.innerHTML = ''; // Limpar antes de carregar os chamados
+                tabela.innerHTML = ''; 
 
                 chamados.forEach(chamado => {
                     const horarioCriado = chamado.horarioSolicitado

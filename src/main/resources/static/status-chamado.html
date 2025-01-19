@@ -8,7 +8,7 @@
     <script>
         async function fetchStatusAndUpdate(chamadoId) {
             try {
-                const response = await fetch(`http://147.93.36.85/:8080/api/chamado/${chamadoId}`);
+                const response = await fetch(`http://147.93.36.85:8080/api/chamado/${chamadoId}`);
                 if (!response.ok) {
                     throw new Error("Erro ao obter o status do chamado.");
                 }
