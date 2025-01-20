@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(dados)
 
         try {
-            const response = await fetch("http://syshelp.ddns.net/api/chamado", {
+            const response = await fetch("https://syshelp.ddns.net/api/chamado", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dados)
