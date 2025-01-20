@@ -19,7 +19,6 @@ import io.github.adrianovictorn.syshelp.dtos.ViewCallDTO;
 import io.github.adrianovictorn.syshelp.service.CallService;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("api/chamado")
 public class CallController {
 
