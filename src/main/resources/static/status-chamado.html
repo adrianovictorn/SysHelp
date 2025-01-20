@@ -49,8 +49,14 @@
                 return;
             }
 
-            // Atualiza a barra e o texto do status
+            // Atualiza a barra e o texto do status na primeira carga
             fetchStatusAndUpdate(chamadoId);
+
+            // Configura o botão de "Atualizar Status"
+            const updateButton = document.getElementById("update-button");
+            updateButton.addEventListener("click", function () {
+                fetchStatusAndUpdate(chamadoId);
+            });
         });
     </script>
 </head>
@@ -72,7 +78,8 @@
             </div>
         </div>
         <div class="button-container">
-            <button onclick="window.location.href='index.html'">Voltar à Página Inicial</button>
+            <!-- Botão de Atualizar Status -->
+            <button id="update-button">Atualizar Status</button>
         </div>
     </main>
     <footer>&copy; Adriano Victor N. Ribeiro - 2025</footer>
