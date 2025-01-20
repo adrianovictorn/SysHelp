@@ -8,7 +8,7 @@
     <script>
         async function fetchStatusAndUpdate(chamadoId) {
             try {
-                const response = await fetch(`https://syshelp.ddns.net/api/chamado/${chamadoId}`);
+                const response = await fetch(`http://syshelp.ddns.net/api/chamado/${chamadoId}`);
                 if (!response.ok) {
                     throw new Error("Erro ao obter o status do chamado.");
                 }
