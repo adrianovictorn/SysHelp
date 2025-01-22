@@ -10,5 +10,6 @@ public enum Setores {
     SMEL, // Secretaria Municipal de Esporte e Lazer
     SMP, // Secretaria Municipal de Planejamento
     SMA, // Secretaria Municipal de Agricultura
-    SMPR // Secretaria Municipal de Políticas Públicas para Mulheres
+    SMPR, // Secretaria Municipal de Políticas Públicas para Mulheres
+    HMCA
 }

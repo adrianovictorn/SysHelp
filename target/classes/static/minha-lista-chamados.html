@@ -213,6 +213,7 @@
                     row.innerHTML = `
                         <td data-label="ID" onclick="toggleDetalhes(${chamado.id})">${chamado.id}</td>
                         <td data-label="Solicitante">${chamado.solicitante}</td>
+                        <td data-label="Numero">${chamado.numero}
                         <td data-label="Setor">${chamado.setor}</td>
                         <td data-label="Descrição">${chamado.descricao}</td>
                         <td data-label="Data/Horário de Abertura">${horarioCriado}</td>
@@ -287,14 +288,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Nº do Chamado</th>
                     <th>Solicitante</th>
+                    <th>Nº Contato</th>
                     <th>Setor</th>
                     <th>Descrição</th>
                     <th>Data/Horário de Abertura</th>
                     <th>Ocorrências</th>
                     <th>Status</th>
                     <th>Ações</th>
+
                 </tr>
             </thead>
             <tbody id="tabela-chamados">

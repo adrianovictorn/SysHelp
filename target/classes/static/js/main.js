@@ -8,7 +8,9 @@ const setores = {
     "Secretaria Municipal de Esporte e Lazer (SMEL)": "SMEL",
     "Secretaria Municipal de Planejamento (SMP)": "SMP",
     "Secretaria Municipal de Agricultura (SMA)": "SMA",
-    "Secretaria Municipal de Políticas Públicas para Mulheres (SMPR)": "SMPR"
+    "Secretaria Municipal de Políticas Públicas para Mulheres (SMPR)": "SMPR",
+    "Hospital Municipal (HM)": "HM"
+
 };
 
 const tiposOcorrencia = {
@@ -20,11 +22,11 @@ const tiposOcorrencia = {
 function preencherDropdown(dados, botaoId, listaId, inputId) {
     const botao = document.getElementById(botaoId);
     const lista = document.getElementById(listaId);
-    const input = document.getElementById(inputId); // Certifique-se de que o elemento existe
+    const input = document.getElementById(inputId);
 
     if (!input) {
         console.error(`Elemento com ID '${inputId}' não encontrado!`);
-        return; // Impede a execução se o campo oculto não existir
+        return; 
     }
 
     lista.innerHTML = "";
@@ -85,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             solicitante: document.getElementById("solicitante").value,
             numero: document.getElementById("numero").value,
             setor: document.getElementById("setor").value,
+            departamento: document.getElementById("departamento").value,
             ocorrencia: document.getElementById("ocorrencia").value,
             descricao: document.getElementById("descricao").value,
         };
@@ -92,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(dados)
 
         try {
-            const response = await fetch("http://147.93.36.85:8080/api/chamado", {
+            const response = await fetch("/api/chamado", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dados)
