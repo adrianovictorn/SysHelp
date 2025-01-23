@@ -25,11 +25,12 @@ public class CallService {
     public ViewCallDTO criarChamado(CreateCallDTO dto){
         Call novoChamado = new Call();
         novoChamado.setSolicitante(dto.solicitante());
+        novoChamado.setNumeroParaContato(dto.numero());
         novoChamado.setSetor(dto.setor());
+        novoChamado.setDepartamento(dto.departamento());
         novoChamado.setOcorrencia(dto.ocorrencia());
         novoChamado.setDescricao(dto.descricao());
         novoChamado.setStatus(Status.AGUARDANDO);
-        novoChamado.setNumeroParaContato(dto.numero());
       
 
         repository.save(novoChamado);

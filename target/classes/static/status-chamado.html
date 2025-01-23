@@ -8,7 +8,7 @@
     <script>
         async function fetchStatusAndUpdate(chamadoId) {
             try {
-                const response = await fetch(`http://147.93.36.85:8080/api/chamado/${chamadoId}`);
+                const response = await fetch(`https://syshelp.ddns.net/api/chamado/${chamadoId}`);
                 if (!response.ok) {
                     throw new Error("Erro ao obter o status do chamado.");
                 }
@@ -49,8 +49,14 @@
                 return;
             }
 
-            // Atualiza a barra e o texto do status
+            // Atualiza a barra e o texto do status na primeira carga
             fetchStatusAndUpdate(chamadoId);
+
+            // Configura o botão de "Atualizar Status"
+            const updateButton = document.getElementById("update-button");
+            updateButton.addEventListener("click", function () {
+                fetchStatusAndUpdate(chamadoId);
+            });
         });
     </script>
 </head>
@@ -72,7 +78,8 @@
             </div>
         </div>
         <div class="button-container">
-            <button onclick="window.location.href='index.html'">Voltar à Página Inicial</button>
+            <!-- Botão de Atualizar Status -->
+            <button id="update-button">Atualizar Status</button>
         </div>
     </main>
     <footer>&copy; Adriano Victor N. Ribeiro - 2025</footer>
