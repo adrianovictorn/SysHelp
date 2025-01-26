@@ -48,10 +48,13 @@ public class Call {
     private String solicitante;
 
     @Enumerated(EnumType.STRING)
+    private Departamento departamento;
+    
+    @Column(nullable = true)  
+    @Enumerated(EnumType.STRING)
     private Setores setor;
     
-    @Enumerated(EnumType.STRING)
-    private Departamento departamento;
+    
 
  
     @Column(name = "Descricao", length = 150)

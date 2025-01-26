@@ -27,7 +27,7 @@
         }
 
         main {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 20px auto;
             padding: 20px;
             background-color: white;
@@ -52,7 +52,7 @@
         }
 
         table th, table td {
-            padding: 12px;
+            padding: 10px;
             text-align: left;
             border: 1px solid #ddd;
         }
@@ -213,7 +213,8 @@
                     row.innerHTML = `
                         <td data-label="ID" onclick="toggleDetalhes(${chamado.id})">${chamado.id}</td>
                         <td data-label="Solicitante">${chamado.solicitante}</td>
-                        <td data-label="Numero">${chamado.numero}
+                        <td data-label="Numero">${chamado.numero}</td>
+                        <td data-label="Departamento">${chamado.departamento}</td>
                         <td data-label="Setor">${chamado.setor}</td>
                         <td data-label="Descrição">${chamado.descricao}</td>
                         <td data-label="Data/Horário de Abertura">${horarioCriado}</td>
@@ -291,6 +292,7 @@
                     <th>Nº do Chamado</th>
                     <th>Solicitante</th>
                     <th>Nº Contato</th>
+                    <th>Departamento</th>
                     <th>Setor</th>
                     <th>Descrição</th>
                     <th>Data/Horário de Abertura</th>

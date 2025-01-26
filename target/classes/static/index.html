@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SysHelp</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-    
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+   
     <header>
         <h1>SysHelp - Sistema de Gerenciamento de Chamados</h1>
     </header>
@@ -26,30 +23,28 @@
                 <input type="text" id="numero" placeholder="Número para contato" required>
             </div>
 
-            <!-- Dropdown de Setores -->
+            <!-- Dropdown Departamento -->
             <div class="dropdown">
-                <label for="setor">Selecione seu Setor:</label>
-                <div class="dropdown-button" id="dropdown-setor-button">Selecione um setor</div>
-                <ul class="dropdown-list" id="dropdown-setor-list">
-                </ul>
-                <input type="hidden" id="setor" name="setor" required>
+                <label>Departamento:</label>
+                <button type="button" id="dropdown-departamento-button" class="dropdown-button">Selecione um departamento</button>
+                <ul class="dropdown-list" id="dropdown-departamento-list"></ul>
+                <input type="hidden" id="departamento" name="departamento">
             </div>
 
+            <!-- Dropdown Setor -->
             <div class="dropdown">
-                <label for="departamento">Selecione seu Departamento</label>
-                <div class="dropdown-button" ></div>
-                <ul class="dropdown-list">
-                </ul>
-                <input type="hidden" name="" required>
+                <label>Setor:</label>
+                <button type="button" class="dropdown-button" id="dropdown-setor-button">Selecione um setor</button>
+                <ul class="dropdown-list" id="dropdown-setor-list"></ul>
+                <input type="hidden" id="setor" name="setor">
             </div>
 
-            <!-- Dropdown de Ocorrências -->
+            <!-- Dropdown Ocorrência -->
             <div class="dropdown">
-                <label for="ocorrencia">Selecione o Tipo de Ocorrência:</label>
-                <div class="dropdown-button" id="dropdown-ocorrencia-button">Selecione o Tipo de Ocorrência</div>
-                <ul class="dropdown-list" id="dropdown-ocorrencia-list">
-                </ul>
-                <input type="hidden" id="ocorrencia" name="ocorrencia" required>
+                <label>Ocorrência:</label>
+                <button type="button" id="dropdown-ocorrencia-button" class="dropdown-button">Selecione o tipo de ocorrência</button>
+                <ul class="dropdown-list" id="dropdown-ocorrencia-list"></ul>
+                <input type="hidden" id="ocorrencia" name="ocorrencia">
             </div>
 
             <div>
@@ -57,12 +52,11 @@
                 <textarea id="descricao" name="descricao" placeholder="Descreva o problema ou solicitação" required></textarea>
             </div>
             <div class="button-container">
-                <button type="submit">Enviar Chamado</button>
+                <button type="submit" id="submit">Enviar Chamado</button>
             </div>
         </form>
     </main>
     <footer>&copy; Adriano Victor N. Ribeiro - 2025</footer>
-
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

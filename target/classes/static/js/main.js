@@ -1,7 +1,8 @@
-const setores = {
+// Dados dos Departamentos
+const departamentos = {
     "Prefeitura Municipal (PM)": "PM",
     "Secretaria Municipal de Saúde (SMS)": "SMS",
-    "Secretaria Municipal de Infraestrutura (SMI)": "SEINFRA",
+    "Secretaria Municipal de Infraestrutura (SMI)": "SMI",
     "Secretaria Municipal de Transporte (SMT)": "SMT",
     "Secretaria Municipal de Educação (SME)": "SME",
     "Secretaria Municipal de Assistência Social (SMAS)": "SMAS",
@@ -10,27 +11,47 @@ const setores = {
     "Secretaria Municipal de Agricultura (SMA)": "SMA",
     "Secretaria Municipal de Políticas Públicas para Mulheres (SMPR)": "SMPR",
     "Hospital Municipal (HM)": "HM"
-
 };
 
+// Dados dos Setores por Departamento
+const setoresPorDepartamento = {
+    "PM": [
+        { nome: "Recursos Humanos (RH)", codigo: "RH" },
+        { nome: "Controle Interno", codigo: "CONTROLE_INTERNO" },
+        { nome: "Tributos", codigo: "TRIBUTOS" },
+        { nome: "Recepção", codigo: "RECEPCAO" },
+        { nome: "Gabinete", codigo: "GABINETE" },
+        { nome: "Contabilidade", codigo: "CONTABILIDADE" },
+        { nome: "Tesouraria", codigo: "TESOURARIA" },
+        { nome: "Licitação", codigo: "LICITACAO" },
+        { nome: "Convênios", codigo: "CONVENIOS" },
+        { nome: "Comunicação", codigo: "COMUNICACAO" }
+    ],
+    //"SMS": [
+     //   { nome: "Atendimento Médico", codigo: "ATENDIMENTO_MEDICO" },
+       // { nome: "Farmácia", codigo: "FARMACIA" }
+   // ]
+};
+
+// Dados dos Tipos de Ocorrência
 const tiposOcorrencia = {
     "Manutenção de Equipamento ou Sistema": "MANUTENCAO",
     "Requisição de Material": "REQUISICAO",
     "Consulta Técnica": "CONSULTA"
 };
 
-function preencherDropdown(dados, botaoId, listaId, inputId) {
+// Função para preencher dropdowns
+function preencherDropdown(dados, botaoId, listaId, inputId, callback) {
     const botao = document.getElementById(botaoId);
     const lista = document.getElementById(listaId);
     const input = document.getElementById(inputId);
 
-    if (!input) {
-        console.error(`Elemento com ID '${inputId}' não encontrado!`);
-        return; 
+    if (!botao || !lista || !input) {
+        console.error(`Elementos não encontrados: ${botaoId}, ${listaId}, ${inputId}`);
+        return;
     }
 
     lista.innerHTML = "";
-
     for (const [nome, codigo] of Object.entries(dados)) {
         const listItem = document.createElement("li");
         listItem.className = "dropdown-item";
@@ -39,47 +60,87 @@ function preencherDropdown(dados, botaoId, listaId, inputId) {
 
         listItem.addEventListener("click", () => {
             botao.textContent = nome;
-            botao.dataset.value = codigo;
-            input.value = codigo; 
-            console.log("Valor atualizado em #ocorrencia:", input.value);
+            input.value = codigo;
             lista.classList.remove("open");
+            if (callback) callback(codigo);
         });
 
         lista.appendChild(listItem);
     }
 
-    botao.addEventListener("click", () => lista.classList.toggle("open"));
-
-    document.addEventListener("click", (event) => {
-        if (!botao.contains(event.target) && !lista.contains(event.target)) {
-            lista.classList.remove("open");
-        }
+    botao.addEventListener("click", (e) => {
+        e.stopPropagation();
+        lista.classList.toggle("open");
     });
+
+    document.addEventListener("click", () => lista.classList.remove("open"));
+}
+
+// Função para carregar setores (corrigida)
+function carregarSetores(departamentoCodigo) {
+    const setores = setoresPorDepartamento[departamentoCodigo] || [];
+    const lista = document.getElementById("dropdown-setor-list");
+    const botao = document.getElementById("dropdown-setor-button");
+    const input = document.getElementById("setor");
+
+    // Reset completo
+    lista.innerHTML = "";
+    input.value = "";
+    lista.classList.remove("open");
+
+    if (setores.length === 0) {
+        botao.textContent = "Nenhum setor disponível";
+        botao.disabled = true;
+    } else {
+        botao.textContent = "Selecione um setor";
+        botao.disabled = false;
+
+        setores.forEach(setor => {
+            const item = document.createElement("li");
+            item.className = "dropdown-item";
+            item.textContent = setor.nome;
+            item.dataset.value = setor.codigo;
+
+            item.addEventListener("click", () => {
+                botao.textContent = setor.nome;
+                input.value = setor.codigo;
+                lista.classList.remove("open");
+            });
+
+            lista.appendChild(item);
+        });
+
+        // Abre o dropdown automaticamente após carregar
+        setTimeout(() => lista.classList.add("open"), 50);
+    }
 }
 
 // Função para aplicar máscara no número de telefone
 function aplicarMascaraTelefone(input) {
-    let valor = input.value.replace(/\D/g, ""); // Remove tudo que não é número
+    let valor = input.value.replace(/\D/g, "");
     if (valor.length > 10) {
-        // Formato com DDD e 9 dígitos
         valor = valor.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
     } else if (valor.length > 0) {
-        // Formato com DDD e 8 dígitos
         valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4})$/, "($1) $2-$3");
     }
     input.value = valor;
 }
 
-// Preenche os dropdowns ao carregar a página
+// Inicialização
 document.addEventListener("DOMContentLoaded", () => {
-    preencherDropdown(setores, "dropdown-setor-button", "dropdown-setor-list", "setor");
+    preencherDropdown(
+        departamentos,
+        "dropdown-departamento-button",
+        "dropdown-departamento-list",
+        "departamento",
+        carregarSetores
+    );
+
     preencherDropdown(tiposOcorrencia, "dropdown-ocorrencia-button", "dropdown-ocorrencia-list", "ocorrencia");
 
-    // Aplica máscara ao número de telefone
     const numeroInput = document.getElementById("numero");
     numeroInput.addEventListener("input", () => aplicarMascaraTelefone(numeroInput));
 
-    // Lógica para envio do formulário
     document.getElementById("chamado-form").addEventListener("submit", async (event) => {
         event.preventDefault();
 
@@ -92,8 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
             descricao: document.getElementById("descricao").value,
         };
 
-        console.log(dados)
-
         try {
             const response = await fetch("/api/chamado", {
                 method: "POST",
@@ -104,12 +163,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 const result = await response.json();
                 alert("Chamado enviado com sucesso! ID: " + result.id);
-                window.location.href = "status-chamado.html?id=" + result.id; // Redireciona para a página de status
+                window.location.href = "status-chamado.html?id=" + result.id;
             } else {
-                alert("Erro ao enviar o chamado. Verifique os dados e tente novamente.");
+                alert("Erro ao enviar o chamado.");
             }
-        } catch (error) {
-            alert("Erro ao conectar ao servidor. Tente novamente mais tarde.");
+        } catch {
+            alert("Erro ao conectar ao servidor.");
         }
     });
 });
