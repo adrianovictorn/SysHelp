@@ -54,9 +54,6 @@ public class Call {
     @Enumerated(EnumType.STRING)
     private Setores setor;
     
-    
-
- 
     @Column(name = "Descricao", length = 150)
     private String descricao;
 

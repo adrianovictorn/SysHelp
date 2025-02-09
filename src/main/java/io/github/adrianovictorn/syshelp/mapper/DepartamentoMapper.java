@@ -14,6 +14,7 @@ public class DepartamentoMapper {
     static{
         Map<Setores, Departamento> map = new EnumMap<>(Setores.class);
 
+        //Prefeitura
         map.put(Setores.CONVENIOS, Departamento.PM);
         map.put(Setores.COMUNICACAO, Departamento.PM);
         map.put(Setores.CONTABILIDADE, Departamento.PM);
@@ -25,6 +26,21 @@ public class DepartamentoMapper {
         map.put(Setores.RH, Departamento.PM);
         map.put(Setores.TESOURARIA, Departamento.PM);
         map.put(Setores.TRIBUTOS, Departamento.PM);
+
+        //SMS
+        map.put(Setores.AB, Departamento.SMS);
+        map.put(Setores.FARMACIA, Departamento.SMS);
+        map.put(Setores.ALMOXARIFADO, Departamento.SMS);
+        map.put(Setores.RECEPCAO, Departamento.SMS);
+        map.put(Setores.CPD, Departamento.SMS);
+        map.put(Setores.VIEP, Departamento.SMS);
+        map.put(Setores.VISA,Departamento.SMS);
+
+
+        //Hospital
+        map.put(Setores.CONSULTORIO_M,Departamento.HMCA);
+        map.put(Setores.FARMACIA,Departamento.HMCA);
+        map.put(Setores.RAIO_X,Departamento.HMCA);
 
         setorParaDepartamento = Collections.unmodifiableMap(map);
     }

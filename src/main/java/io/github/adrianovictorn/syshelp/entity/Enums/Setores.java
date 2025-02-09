@@ -10,6 +10,15 @@ public enum Setores {
     TESOURARIA,
     LICITACAO,
     CONVENIOS,
-    COMUNICACAO
+    COMUNICACAO,
+    AB,
+    CPD,
+    ALMOXARIFADO,
+    REGULACAO,
+    FARMACIA,
+    VISA,
+    VIEP,
+    CONSULTORIO_M,
+    RAIO_X
 
 }

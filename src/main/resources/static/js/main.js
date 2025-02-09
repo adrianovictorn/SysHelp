@@ -1,4 +1,3 @@
-// Dados dos Departamentos
 const departamentos = {
     "Prefeitura Municipal (PM)": "PM",
     "Secretaria Municipal de Saúde (SMS)": "SMS",
@@ -10,27 +9,38 @@ const departamentos = {
     "Secretaria Municipal de Planejamento (SMP)": "SMP",
     "Secretaria Municipal de Agricultura (SMA)": "SMA",
     "Secretaria Municipal de Políticas Públicas para Mulheres (SMPR)": "SMPR",
-    "Hospital Municipal (HM)": "HM"
+    "Hospital Municipal (HM)": "HMCA"
 };
 
-// Dados dos Setores por Departamento
 const setoresPorDepartamento = {
     "PM": [
         { nome: "Recursos Humanos (RH)", codigo: "RH" },
-        { nome: "Controle Interno", codigo: "CONTROLE_INTERNO" },
-        { nome: "Tributos", codigo: "TRIBUTOS" },
-        { nome: "Recepção", codigo: "RECEPCAO" },
-        { nome: "Gabinete", codigo: "GABINETE" },
-        { nome: "Contabilidade", codigo: "CONTABILIDADE" },
-        { nome: "Tesouraria", codigo: "TESOURARIA" },
-        { nome: "Licitação", codigo: "LICITACAO" },
-        { nome: "Convênios", codigo: "CONVENIOS" },
-        { nome: "Comunicação", codigo: "COMUNICACAO" }
+        { nome: "Controle Interno (CI)", codigo: "CONTROLE_INTERNO" },
+        { nome: "Tributos (TR)", codigo: "TRIBUTOS" },
+        { nome: "Recepção (RE)", codigo: "RECEPCAO" },
+        { nome: "Gabinete (GA)", codigo: "GABINETE" },
+        { nome: "Contabilidade (CO)", codigo: "CONTABILIDADE" },
+        { nome: "Tesouraria (TE)", codigo: "TESOURARIA" },
+        { nome: "Licitação (LI)", codigo: "LICITACAO" },
+        { nome: "Convênios (CONV)", codigo: "CONVENIOS" },
+        { nome: "Comunicação (COM)", codigo: "COMUNICACAO" }
     ],
-    //"SMS": [
-     //   { nome: "Atendimento Médico", codigo: "ATENDIMENTO_MEDICO" },
-       // { nome: "Farmácia", codigo: "FARMACIA" }
-   // ]
+    "SMS": [
+        { nome: "Atenção Básica (AB)", codigo: "AB" },
+        { nome: "Centro de Processamento de Dados (CPD)", codigo: "CPD"},
+        { nome: "Almoxarifado", codigo: "ALMOXARIFADO"},
+        { nome: "Vigilância Epidemiológica (VIEP)", codigo: "VIEP"},
+        { nome: "Vigilância Sanitária (VISA)", codigo: "VISA"},
+        { nome: "Regulação", codigo: "REGULACAO"},
+        { nome: "Farmácia", codigo: "FARMACIA"}, 
+    ],
+    "HMCA": [
+        { nome: "Recepção", codigo: "RECEPCAO"},
+        { nome: "Consultório Médico", codigo: "CONSULTORIO_M"},
+        { nome: "Raio X", codigo: "RAIO_X"},
+        
+    ]
+
 };
 
 // Dados dos Tipos de Ocorrência

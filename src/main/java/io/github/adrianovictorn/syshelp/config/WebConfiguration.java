@@ -3,6 +3,7 @@ package io.github.adrianovictorn.syshelp.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,4 +17,24 @@ public class WebConfiguration implements WebMvcConfigurer {
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
     
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        registry.addResourceHandler("/reports/**")
+                .addResourceLocations("classpath:/reports/");
+        
+        registry.addResourceHandler("/css/**")
+                .addResourceLocations("classpath:/static/css/");
+
+        registry.addResourceHandler("/js/**")
+                .addResourceLocations("classpath:/static/js/");
+
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
+        // Se você tiver imagens ou outros arquivos estáticos, pode mapeá-los também:
+        // registry.addResourceHandler("/images/**")
+        //         .addResourceLocations("classpath:/static/images/");
+    }
 }
+
