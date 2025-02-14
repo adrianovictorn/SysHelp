@@ -19,6 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Chamados")
+
 public class Call {
  
     
@@ -58,7 +59,7 @@ public class Call {
     private String descricao;
 
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(updatable = false, name="horario_solicitado")
     private LocalDateTime horarioSolicitado;
 
     @Column(name = "Finalizacao")
@@ -111,17 +112,15 @@ public class Call {
         return horarioSolicitado;
     }
 
+    public LocalDateTime getHorario_solicitado() {
+        return getHorarioSolicitado();
+    }
+
     public void setHorarioSolicitado(LocalDateTime horarioSolicitado) {
         this.horarioSolicitado = horarioSolicitado;
     }
 
-    public LocalDateTime getHorarioFinalizado() {
-        return horarioFinalizado;
-    }
 
-    public void setHorarioFinalizado(LocalDateTime horarioFinalizado) {
-        this.horarioFinalizado = horarioFinalizado;
-    }
 
     public Status getStatus() {
         return status;
