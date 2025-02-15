@@ -62,7 +62,7 @@ public class Call {
     @Column(updatable = false, name="horario_solicitado")
     private LocalDateTime horarioSolicitado;
 
-    @Column(name = "Finalizacao")
+    @Column(name = "finalizacao")
     private LocalDateTime horarioFinalizado;
 
     @Enumerated(EnumType.STRING)
@@ -120,8 +120,18 @@ public class Call {
         this.horarioSolicitado = horarioSolicitado;
     }
 
+    public LocalDateTime getHorarioFinalizado() {
+        return horarioFinalizado;
+    }
 
+    public LocalDateTime getFinalizacao() {
+        return getHorarioFinalizado();
+    }
+    
 
+    public void setHorarioFinalizado(LocalDateTime horarioFinalizado) {
+        this.horarioFinalizado = horarioFinalizado;
+    }
     public Status getStatus() {
         return status;
     }
