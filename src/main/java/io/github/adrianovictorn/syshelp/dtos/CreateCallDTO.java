@@ -2,14 +2,19 @@ package io.github.adrianovictorn.syshelp.dtos;
 
 import io.github.adrianovictorn.syshelp.entity.Enums.Ocorrencia;
 import io.github.adrianovictorn.syshelp.entity.Enums.Setores;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import io.github.adrianovictorn.syshelp.entity.Enums.Departamento;
+
 
 public record CreateCallDTO(
 
-    String solicitante,
+    @NotBlank String solicitante,
+    @NotNull String numero,
+    @NotBlank Departamento departamento,
     Setores setor,
-    String numero,
-    String descricao,
-    Ocorrencia ocorrencia
+    @NotBlank String descricao,
+    @NotNull Ocorrencia ocorrencia
 
 ) {
     

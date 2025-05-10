@@ -1,6 +1,8 @@
 package io.github.adrianovictorn.syshelp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +20,19 @@ import io.github.adrianovictorn.syshelp.dtos.UpdateCallDTO;
 import io.github.adrianovictorn.syshelp.dtos.ViewCallDTO;
 import io.github.adrianovictorn.syshelp.service.CallService;
 
+
+
 @RestController
 @RequestMapping("api/chamado")
 public class CallController {
 
     private final CallService service;
 
+    
     public CallController(CallService service) {
         this.service = service;
     }
-    
+
     @PostMapping
     public ResponseEntity<ViewCallDTO> criarChamado(@RequestBody CreateCallDTO dto){
        ViewCallDTO view = service.criarChamado(dto);
@@ -50,5 +55,8 @@ public class CallController {
         ViewCallDTO chamado = service.buscarChamadoPorId(id);
         return ResponseEntity.ok(chamado);
     }
-
+    
+   
 }
+        
+

@@ -6,10 +6,13 @@ import io.github.adrianovictorn.syshelp.entity.Call;
 import io.github.adrianovictorn.syshelp.entity.Enums.Ocorrencia;
 import io.github.adrianovictorn.syshelp.entity.Enums.Setores;
 import io.github.adrianovictorn.syshelp.entity.Enums.Status;
+import io.github.adrianovictorn.syshelp.entity.Enums.Departamento;
+
 
 public record ListCallDTO(
     Long id,
     String solicitante,
+    Departamento departamento,
     Setores setor,
     String descricao,
     LocalDateTime horarioSolicitado,
@@ -23,6 +26,7 @@ public record ListCallDTO(
        return new ListCallDTO(
         chamado.getId(),
         chamado.getSolicitante(), 
+        chamado.getDepartamento(),
         chamado.getSetor(), 
         chamado.getDescricao(),
         chamado.getHorarioSolicitado(),

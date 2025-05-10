@@ -60,7 +60,6 @@ textarea {
 input[type="text"]:focus, 
 input[list]:focus, 
 textarea:focus {
-    border-color: #003366;
     outline: none;
     background-color: #fff;
 }
@@ -87,7 +86,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+#submit:hover {
     background-color: #002244;
 }
 
@@ -149,8 +148,15 @@ footer {
     max-width: 400px;
 }
 
+
+.dropdown:hover {
+    background-color: white;
+}
+
+
 .dropdown-button {
-    width: 146%;
+    color: black;
+    width: 150%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -175,10 +181,10 @@ footer {
     overflow-y: auto;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #fff;
     display: none;
-    z-index: 1000;
     list-style: none;
+    z-index: 1001; /* Garante sobreposição */
+    background: white; /* Mantém fundo consistente */
 }
 
 .dropdown-list.open {
@@ -194,6 +200,11 @@ footer {
 
 .dropdown-item:hover {
     background-color: #f0f0f0;
+}
+
+#dropdown-setor-list {
+    z-index: 1001; /* Garante sobreposição */
+    background: white; /* Mantém fundo consistente */
 }
 
 /* ---------------------- Responsividade ---------------------- */
@@ -238,7 +249,7 @@ footer {
         font-size: 12px;
     }
     .dropdown-button {
-        width: 95%;
+        width: 100%;
         padding: 10px;
         font-size: 15px;
         border: 1px solid #ccc;

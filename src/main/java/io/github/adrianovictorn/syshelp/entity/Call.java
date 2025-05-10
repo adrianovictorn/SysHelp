@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import io.github.adrianovictorn.syshelp.entity.Enums.Departamento;
 import io.github.adrianovictorn.syshelp.entity.Enums.Ocorrencia;
 import io.github.adrianovictorn.syshelp.entity.Enums.Setores;
 import io.github.adrianovictorn.syshelp.entity.Enums.Status;
@@ -18,8 +19,25 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Chamados")
+
 public class Call {
+ 
     
+    public Call(Long id, String solicitante, Setores setor, Departamento departamento, String descricao,
+    LocalDateTime horarioSolicitado, LocalDateTime horarioFinalizado, Status status, String numeroParaContato,
+    Ocorrencia ocorrencia) {
+        this.id = id;
+        this.solicitante = solicitante;
+        this.setor = setor;
+        this.departamento = departamento;
+        this.descricao = descricao;
+        this.horarioSolicitado = horarioSolicitado;
+        this.horarioFinalizado = horarioFinalizado;
+        this.status = status;
+        this.numeroParaContato = numeroParaContato;
+        this.ocorrencia = ocorrencia;
+    }
+
     public Call() {
     }
 
@@ -31,16 +49,20 @@ public class Call {
     private String solicitante;
 
     @Enumerated(EnumType.STRING)
+    private Departamento departamento;
+    
+    @Column(nullable = true)  
+    @Enumerated(EnumType.STRING)
     private Setores setor;
-
+    
     @Column(name = "Descricao", length = 150)
     private String descricao;
 
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(updatable = false, name="horario_solicitado")
     private LocalDateTime horarioSolicitado;
 
-    @Column(name = "Finalizacao")
+    @Column(name = "finalizacao")
     private LocalDateTime horarioFinalizado;
 
     @Enumerated(EnumType.STRING)
@@ -50,24 +72,9 @@ public class Call {
     @Column (name = "Numero", length = 15)
     private String numeroParaContato;
 
-
     @Enumerated(EnumType.STRING)
     private Ocorrencia ocorrencia;
 
-    
-
-    public Call(Long id, String solicitante, Setores setor, String descricao, LocalDateTime horarioSolicitado,
-            LocalDateTime horarioFinalizado, Status status, String numeroParaContato, Ocorrencia ocorrencia) {
-        this.id = id;
-        this.solicitante = solicitante;
-        this.setor = setor;
-        this.descricao = descricao;
-        this.horarioSolicitado = horarioSolicitado;
-        this.horarioFinalizado = horarioFinalizado;
-        this.status = status;
-        this.numeroParaContato = numeroParaContato;
-        this.ocorrencia = ocorrencia;
-    }
 
     public Long getId() {
         return id;
@@ -105,6 +112,10 @@ public class Call {
         return horarioSolicitado;
     }
 
+    public LocalDateTime getHorario_solicitado() {
+        return getHorarioSolicitado();
+    }
+
     public void setHorarioSolicitado(LocalDateTime horarioSolicitado) {
         this.horarioSolicitado = horarioSolicitado;
     }
@@ -113,10 +124,14 @@ public class Call {
         return horarioFinalizado;
     }
 
+    public LocalDateTime getFinalizacao() {
+        return getHorarioFinalizado();
+    }
+    
+
     public void setHorarioFinalizado(LocalDateTime horarioFinalizado) {
         this.horarioFinalizado = horarioFinalizado;
     }
-
     public Status getStatus() {
         return status;
     }
@@ -141,7 +156,13 @@ public class Call {
         this.ocorrencia = ocorrencia;
     }
 
+    public Departamento getDepartamento() {
+        return departamento;
+    }
 
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
     
 
     
